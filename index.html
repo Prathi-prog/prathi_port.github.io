@@ -30,6 +30,8 @@
       --line:rgba(45,212,191,.12);
       --shadow:0 25px 80px rgba(0,0,0,.34);
       --radius:24px;
+      --heading-size:48px;
+      --body-size:20px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -145,7 +147,7 @@
 
     .sec-head h2{
       font-family:'Space Grotesk',sans-serif;
-      font-size:48px;
+      font-size:var(--heading-size);
       font-weight:700;
       letter-spacing:-.025em;
       text-transform:uppercase;
@@ -160,7 +162,7 @@
       border:1px solid rgba(45,212,191,.14);
       padding:5px 13px;
       border-radius:30px;
-      font-size:13px;
+      font-size:11px;
       white-space:nowrap;
     }
 
@@ -243,6 +245,7 @@
       padding:8px 11px;
       cursor:pointer;
     }
+
     /* ---------- Hero ---------- */
     .hero{
       min-height:100vh;
@@ -263,7 +266,7 @@
 
     .hero-name{
       color:var(--gold);
-      font:800 24px 'JetBrains Mono',monospace;
+      font:800 clamp(17px,1.35vw,24px) 'JetBrains Mono',monospace;
       letter-spacing:3px;
       text-transform:uppercase;
       margin-bottom:18px;
@@ -300,7 +303,7 @@
 
     .hero h1{
       max-width:1000px;
-      font:700 48px/1.08 'Space Grotesk',sans-serif;
+      font:700 clamp(48px,6vw,96px)/1.02 'Space Grotesk',sans-serif;
       letter-spacing:-.045em;
       text-shadow:0 0 55px rgba(45,212,191,.08);
     }
@@ -311,13 +314,49 @@
       -webkit-text-fill-color:transparent;
     }
 
+    /* Animated "eye" glyph — replaces the old blinking text cursor,
+       ties back to "systems that see, classify, and predict" */
+    .scan-icon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:0.62em;
+      height:0.62em;
+      margin-left:16px;
+      color:var(--teal);
+      vertical-align:middle;
+      filter:drop-shadow(0 0 12px rgba(45,212,191,.55));
+      animation:eyeBlink 4.2s ease-in-out infinite;
+      transform-origin:center;
+    }
+
+    .scan-icon svg{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    @keyframes eyeBlink{
+      0%,86%,100%{transform:scaleY(1)}
+      91%{transform:scaleY(.12)}
+      96%{transform:scaleY(1)}
+    }
+
+    .hero .lede{
+      max-width:780px;
+      margin-top:26px;
+      color:var(--muted);
+      font-size:var(--body-size);
+      line-height:1.75;
+    }
+
     .hero-meta{
       display:flex;
       flex-wrap:wrap;
       gap:10px 26px;
       margin-top:30px;
       color:var(--muted);
-      font:500 11px 'JetBrains Mono',monospace;
+      font:500 12px 'JetBrains Mono',monospace;
     }
 
     .hero-meta b{color:var(--text);font-weight:600}
@@ -337,7 +376,7 @@
       min-height:46px;
       padding:12px 22px;
       border-radius:999px;
-      font:600 11px 'JetBrains Mono',monospace;
+      font:600 12px 'JetBrains Mono',monospace;
       transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,color .25s ease,background .25s ease;
       backdrop-filter:blur(8px);
       cursor:pointer;
@@ -432,7 +471,7 @@
       backdrop-filter:blur(12px);
       border-radius:14px;
       color:var(--text);
-      font:600 10px 'JetBrains Mono',monospace;
+      font:600 11px 'JetBrains Mono',monospace;
       box-shadow:0 15px 40px rgba(0,0,0,.3),0 0 25px rgba(45,212,191,.06);
       animation:chipFloat 5s ease-in-out infinite;
     }
@@ -512,7 +551,7 @@
     .stat-label{
       margin-top:4px;
       color:var(--muted);
-      font:500 10px 'JetBrains Mono',monospace;
+      font:500 11px 'JetBrains Mono',monospace;
       text-transform:uppercase;
       letter-spacing:.08em;
     }
@@ -526,11 +565,11 @@
     }
 
     .about-text p{
-      max-width:70ch;
-      margin-bottom:20px;
+      max-width:75ch;
+      margin-bottom:22px;
       color:var(--muted);
-      font-size:20px;
-      line-height:1.75;
+      font-size:var(--body-size);
+      line-height:1.8;
     }
 
     .about-panel{
@@ -556,19 +595,19 @@
 
     .mini-label{
       color:var(--teal);
-      font:600 9px 'JetBrains Mono',monospace;
+      font:600 10px 'JetBrains Mono',monospace;
       text-transform:uppercase;
       letter-spacing:.08em;
       margin-bottom:7px;
     }
 
     .mini-value{
-      font:600 17px 'Space Grotesk',sans-serif;
+      font:600 18px 'Space Grotesk',sans-serif;
     }
 
     .mini-sub{
       color:var(--muted);
-      font-size:11px;
+      font-size:12px;
       margin-top:4px;
     }
 
@@ -588,7 +627,7 @@
     }
 
     .about-interests h3{
-      font:700 12px 'JetBrains Mono',monospace;
+      font:700 13px 'JetBrains Mono',monospace;
       color:var(--gold);
       text-transform:uppercase;
       margin-bottom:20px;
@@ -606,7 +645,7 @@
       border-radius:999px;
       color:#d9e2ef;
       background:rgba(45,212,191,.045);
-      font:500 10px 'JetBrains Mono',monospace;
+      font:500 11px 'JetBrains Mono',monospace;
     }
 
     /* ---------- Skills ---------- */
@@ -617,7 +656,7 @@
     }
 
     .skill-col{
-      min-height:240px;
+      min-height:260px;
       padding:30px 24px;
       border:1px solid var(--line);
       border-radius:22px;
@@ -635,7 +674,7 @@
 
     .skill-col h3{
       color:var(--gold);
-      font:700 10px 'JetBrains Mono',monospace;
+      font:700 11px 'JetBrains Mono',monospace;
       letter-spacing:.08em;
       text-transform:uppercase;
       margin-bottom:22px;
@@ -645,7 +684,7 @@
       list-style:none;
       display:flex;
       flex-direction:column;
-      gap:13px;
+      gap:15px;
     }
 
     .skill-col li{
@@ -653,7 +692,7 @@
       align-items:center;
       gap:10px;
       color:#dce5f2;
-      font-size:20px;
+      font-size:16px;
     }
 
     .skill-col li:before{
@@ -679,7 +718,7 @@
 
     .soft-skills h3{
       color:var(--gold);
-      font:700 10px 'JetBrains Mono',monospace;
+      font:700 11px 'JetBrains Mono',monospace;
       text-transform:uppercase;
       margin-right:4px;
     }
@@ -690,7 +729,7 @@
       color:#dce5f2;
       background:rgba(45,212,191,.05);
       border:1px solid rgba(45,212,191,.14);
-      font:500 10px 'JetBrains Mono',monospace;
+      font:500 11px 'JetBrains Mono',monospace;
     }
 
     /* ---------- Projects ---------- */
@@ -702,7 +741,7 @@
 
     .proj-card{
       position:relative;
-      min-height:310px;
+      min-height:360px;
       padding:30px;
       border:1px solid var(--line);
       border-radius:24px;
@@ -712,6 +751,8 @@
       overflow:hidden;
       transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
       transform-style:preserve-3d;
+      display:flex;
+      flex-direction:column;
     }
 
     .proj-card:before{
@@ -740,18 +781,19 @@
       padding:5px 11px;
       border-radius:999px;
       margin-bottom:18px;
-      font:500 9px 'JetBrains Mono',monospace;
+      font:500 10px 'JetBrains Mono',monospace;
+      width:fit-content;
     }
 
     .proj-card h3{
-      font:700 20px 'Space Grotesk',sans-serif;
+      font:700 25px 'Space Grotesk',sans-serif;
       margin-bottom:10px;
     }
 
     .proj-card p{
       color:var(--muted);
-      font-size:20px;
-      line-height:1.7;
+      font-size:16px;
+      line-height:1.65;
       margin-bottom:18px;
     }
 
@@ -768,7 +810,7 @@
       border:1px solid rgba(255,255,255,.06);
       border-radius:999px;
       padding:5px 10px;
-      font:500 9px 'JetBrains Mono',monospace;
+      font:500 10px 'JetBrains Mono',monospace;
     }
 
     .project-bottom{
@@ -785,7 +827,7 @@
       align-items:center;
       gap:10px;
       color:#69758e;
-      font:500 9px 'JetBrains Mono',monospace;
+      font:500 10px 'JetBrains Mono',monospace;
     }
 
     .conf-bar{
@@ -821,7 +863,7 @@
       border:1px solid rgba(255,255,255,.1);
       border-radius:9px;
       color:#b7c2d5;
-      font:500 9px 'JetBrains Mono',monospace;
+      font:500 10px 'JetBrains Mono',monospace;
       transition:.25s;
     }
 
@@ -857,7 +899,7 @@
 
     .edu-year{
       color:var(--gold);
-      font:600 11px 'JetBrains Mono',monospace;
+      font:600 12px 'JetBrains Mono',monospace;
       padding-top:5px;
       text-align:right;
     }
@@ -888,13 +930,13 @@
     }
 
     .edu-content h3{
-      font:700 20px 'Space Grotesk',sans-serif;
+      font:700 22px 'Space Grotesk',sans-serif;
       margin-bottom:8px;
     }
 
     .edu-content p{
       color:var(--muted);
-      font-size:20px;
+      font-size:16px;
       margin-bottom:6px;
     }
 
@@ -906,7 +948,7 @@
       color:var(--teal);
       border:1px solid rgba(45,212,191,.18);
       background:rgba(45,212,191,.05);
-      font:500 9px 'JetBrains Mono',monospace;
+      font:500 10px 'JetBrains Mono',monospace;
     }
 
     /* ---------- Achievements ---------- */
@@ -932,7 +974,7 @@
 
     .ach-card h3{
       color:var(--gold);
-      font:700 11px 'JetBrains Mono',monospace;
+      font:700 12px 'JetBrains Mono',monospace;
       text-transform:uppercase;
       letter-spacing:.08em;
       margin-bottom:22px;
@@ -950,7 +992,7 @@
       align-items:flex-start;
       gap:12px;
       color:#e4ebf5;
-      font-size:20px;
+      font-size:16px;
     }
 
     .ach-card li:before{
@@ -962,7 +1004,7 @@
     .ach-card .sub{
       display:block;
       color:var(--muted);
-      font-size:11px;
+      font-size:12px;
       margin-top:3px;
     }
 
@@ -1000,7 +1042,7 @@
     .contact-panel h2{
       position:relative;
       z-index:2;
-      font:700 48px/1.08 'Space Grotesk',sans-serif;
+      font:700 clamp(34px,5vw,62px)/1.05 'Space Grotesk',sans-serif;
       letter-spacing:-.03em;
       text-transform:uppercase;
     }
@@ -1008,10 +1050,10 @@
     .contact-panel p{
       position:relative;
       z-index:2;
-      max-width:620px;
+      max-width:640px;
       margin:18px auto 32px;
       color:var(--muted);
-      font-size:20px;
+      font-size:var(--body-size);
     }
 
     .contact-links{
@@ -1029,7 +1071,7 @@
       border-top:1px solid rgba(45,212,191,.07);
       color:#69758e;
       text-align:center;
-      font:500 10px 'JetBrains Mono',monospace;
+      font:500 11px 'JetBrains Mono',monospace;
       position:relative;
       z-index:3;
     }
@@ -1054,6 +1096,7 @@
       .hero-photo-zone{min-height:430px}
       .skill-cols{grid-template-columns:repeat(2,1fr)}
       .stats-strip{grid-template-columns:repeat(2,1fr)}
+      :root{--heading-size:40px}
     }
 
     @media(max-width:800px){
@@ -1104,14 +1147,14 @@
       }
       .edu-year{text-align:left}
       .edu-content:before{left:-28px}
+      :root{--heading-size:34px;--body-size:18px}
     }
 
     @media(max-width:520px){
       .wrap{padding:0 17px}
-      .hero h1{font-size:42px}
-      .sec-head h2,.contact-panel h2{font-size:42px}
-      .hero .lede{font-size:18px}
-      .hero-meta{font-size:9px;gap:9px 15px}
+      .hero h1{font-size:clamp(40px,12vw,62px)}
+      .hero .lede{font-size:17px}
+      .hero-meta{font-size:10px;gap:9px 15px}
       .cta-row .btn{width:100%}
       .stats-strip{grid-template-columns:1fr}
       .about-panel{grid-template-columns:1fr}
@@ -1123,6 +1166,8 @@
       .contact-panel{padding:58px 22px}
       .sec-head{align-items:flex-start;flex-direction:column}
       .scroll-hint{display:none}
+      :root{--heading-size:28px;--body-size:16px}
+      .about-text p,.proj-card p,.skill-col li,.ach-card li,.edu-content p,.contact-panel p{font-size:16px}
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -1176,7 +1221,12 @@
           <h1>
             Building systems that
             <span class="gradient-word">see, classify,</span>
-            and predict
+            and predict<span class="scan-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z"/>
+                <circle cx="12" cy="12" r="3.2"/>
+              </svg>
+            </span>
           </h1>
 
           <p class="lede">
