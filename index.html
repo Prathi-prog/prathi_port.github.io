@@ -145,7 +145,7 @@
 
     .sec-head h2{
       font-family:'Space Grotesk',sans-serif;
-      font-size:clamp(30px,3vw,48px);
+      font-size:48px;
       font-weight:700;
       letter-spacing:-.025em;
       text-transform:uppercase;
@@ -160,7 +160,7 @@
       border:1px solid rgba(45,212,191,.14);
       padding:5px 13px;
       border-radius:30px;
-      font-size:11px;
+      font-size:13px;
       white-space:nowrap;
     }
 
@@ -243,7 +243,6 @@
       padding:8px 11px;
       cursor:pointer;
     }
-
     /* ---------- Hero ---------- */
     .hero{
       min-height:100vh;
@@ -264,7 +263,7 @@
 
     .hero-name{
       color:var(--gold);
-      font:800 clamp(17px,1.35vw,24px) 'JetBrains Mono',monospace;
+      font:800 24px 'JetBrains Mono',monospace;
       letter-spacing:3px;
       text-transform:uppercase;
       margin-bottom:18px;
@@ -301,7 +300,7 @@
 
     .hero h1{
       max-width:1000px;
-      font:700 clamp(48px,6vw,96px)/1.02 'Space Grotesk',sans-serif;
+      font:700 48px/1.08 'Space Grotesk',sans-serif;
       letter-spacing:-.045em;
       text-shadow:0 0 55px rgba(45,212,191,.08);
     }
@@ -310,26 +309,6 @@
       background:linear-gradient(100deg,#fff 15%,var(--teal) 70%,#9bfff0);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
-    }
-
-    .cursor{
-      display:inline-block;
-      width:4px;
-      height:.62em;
-      background:var(--teal);
-      margin-left:5px;
-      vertical-align:-.02em;
-      animation:blink 1s step-end infinite;
-    }
-
-    @keyframes blink{50%{opacity:0}}
-
-    .hero .lede{
-      max-width:760px;
-      margin-top:26px;
-      color:var(--muted);
-      font-size:17px;
-      line-height:1.75;
     }
 
     .hero-meta{
@@ -550,8 +529,8 @@
       max-width:70ch;
       margin-bottom:20px;
       color:var(--muted);
-      font-size:15px;
-      line-height:1.8;
+      font-size:20px;
+      line-height:1.75;
     }
 
     .about-panel{
@@ -674,7 +653,7 @@
       align-items:center;
       gap:10px;
       color:#dce5f2;
-      font-size:13px;
+      font-size:20px;
     }
 
     .skill-col li:before{
@@ -765,13 +744,13 @@
     }
 
     .proj-card h3{
-      font:700 23px 'Space Grotesk',sans-serif;
+      font:700 20px 'Space Grotesk',sans-serif;
       margin-bottom:10px;
     }
 
     .proj-card p{
       color:var(--muted);
-      font-size:13px;
+      font-size:20px;
       line-height:1.7;
       margin-bottom:18px;
     }
@@ -915,7 +894,7 @@
 
     .edu-content p{
       color:var(--muted);
-      font-size:13px;
+      font-size:20px;
       margin-bottom:6px;
     }
 
@@ -971,7 +950,7 @@
       align-items:flex-start;
       gap:12px;
       color:#e4ebf5;
-      font-size:13px;
+      font-size:20px;
     }
 
     .ach-card li:before{
@@ -1021,7 +1000,7 @@
     .contact-panel h2{
       position:relative;
       z-index:2;
-      font:700 clamp(34px,5vw,62px)/1.05 'Space Grotesk',sans-serif;
+      font:700 48px/1.08 'Space Grotesk',sans-serif;
       letter-spacing:-.03em;
       text-transform:uppercase;
     }
@@ -1032,7 +1011,7 @@
       max-width:620px;
       margin:18px auto 32px;
       color:var(--muted);
-      font-size:15px;
+      font-size:20px;
     }
 
     .contact-links{
@@ -1129,8 +1108,9 @@
 
     @media(max-width:520px){
       .wrap{padding:0 17px}
-      .hero h1{font-size:clamp(40px,12vw,62px)}
-      .hero .lede{font-size:15px}
+      .hero h1{font-size:42px}
+      .sec-head h2,.contact-panel h2{font-size:42px}
+      .hero .lede{font-size:18px}
       .hero-meta{font-size:9px;gap:9px 15px}
       .cta-row .btn{width:100%}
       .stats-strip{grid-template-columns:1fr}
@@ -1196,7 +1176,7 @@
           <h1>
             Building systems that
             <span class="gradient-word">see, classify,</span>
-            and predict<span class="cursor"></span>
+            and predict
           </h1>
 
           <p class="lede">
