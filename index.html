@@ -90,18 +90,24 @@
     /* ---------- Global layout ---------- */
     .wrap{
       width:100%;
-      max-width:1600px;
-      margin:0 auto;
-      padding:0 64px;
+      max-width:none;
+      margin:0;
+      padding:0 5vw;
       position:relative;
       z-index:3;
+    }
+
+    @media(min-width:1700px){
+      .wrap{padding-left:4vw;padding-right:4vw}
+      .hero-grid{min-height:610px}
+      .stats-strip{width:100%}
     }
 
     section{
       position:relative;
       width:100%;
       min-height:70vh;
-      padding:110px 0;
+      padding:120px 0;
       border-top:1px solid rgba(45,212,191,.07);
       overflow:hidden;
     }
@@ -180,9 +186,10 @@
 
     .brand{
       font-family:'JetBrains Mono',monospace;
-      font-size:14px;
-      font-weight:700;
-      letter-spacing:.7px;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
       color:var(--teal);
       padding:6px 13px;
       border-radius:30px;
@@ -196,9 +203,9 @@
     .navlinks{
       display:flex;
       align-items:center;
-      gap:28px;
-      font:500 11px 'JetBrains Mono',monospace;
-      text-transform:lowercase;
+      gap:32px;
+      font:800 12px 'JetBrains Mono',monospace;
+      text-transform:uppercase;
     }
 
     .navlinks a{
@@ -248,8 +255,8 @@
 
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);
-      gap:70px;
+      grid-template-columns:minmax(0,1.25fr) minmax(420px,.75fr);
+      gap:clamp(70px,8vw,150px);
       align-items:center;
     }
 
@@ -257,10 +264,11 @@
 
     .hero-name{
       color:var(--gold);
-      font:700 13px 'JetBrains Mono',monospace;
-      letter-spacing:2.5px;
+      font:800 clamp(17px,1.35vw,24px) 'JetBrains Mono',monospace;
+      letter-spacing:3px;
       text-transform:uppercase;
-      margin-bottom:16px;
+      margin-bottom:18px;
+      text-shadow:0 0 22px rgba(245,166,35,.18);
     }
 
     .tag-eyebrow{
@@ -293,7 +301,7 @@
 
     .hero h1{
       max-width:1000px;
-      font:700 clamp(44px,6.3vw,88px)/1.02 'Space Grotesk',sans-serif;
+      font:700 clamp(48px,6vw,96px)/1.02 'Space Grotesk',sans-serif;
       letter-spacing:-.045em;
       text-shadow:0 0 55px rgba(45,212,191,.08);
     }
@@ -1156,7 +1164,7 @@
   <!-- ================= NAV ================= -->
   <nav>
     <div class="wrap">
-      <a class="brand" href="#home">pratheek<span>.harish</span></a>
+      <a class="brand" href="#home">PRATHEEK<span>.HARISH</span></a>
 
       <button class="nav-menu" id="navMenu" aria-label="Open menu">☰</button>
 
