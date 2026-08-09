@@ -9,7 +9,7 @@
   <style>
     /* reset & base */
     *{box-sizing:border-box; margin:0; padding:0;}
-    html{scroll-behavior:smooth;}
+    html{scroll-behavior:smooth; width:100%;}
     body{
       background:#0a0f1e;
       color:#eef2f8;
@@ -17,6 +17,8 @@
       line-height:1.5;
       -webkit-font-smoothing:antialiased;
       overflow-x:hidden;
+      width:100%;
+      min-height:100vh;
     }
     ::selection{background:#2DD4BF; color:#0a0f1e;}
     a{color:inherit; text-decoration:none;}
@@ -32,9 +34,10 @@
     }
 
     .wrap{
-      max-width:1100px; margin:0 auto; padding:0 24px;
-      position:relative; z-index:2;
+      max-width:1400px; margin:0 auto; padding:0 48px;
+      position:relative; z-index:2; width:100%;
     }
+    @media(max-width:900px){.wrap{padding:0 24px;}}
 
     /* glass nav */
     nav{
@@ -43,6 +46,7 @@
       background:rgba(10,15,30,0.6);
       border-bottom:1px solid rgba(45,212,191,0.15);
       box-shadow:0 4px 30px rgba(0,0,0,0.3);
+      width:100%;
     }
     nav .wrap{
       display:flex; align-items:center; justify-content:space-between;
@@ -50,7 +54,8 @@
     }
     .brand{
       font-family:'JetBrains Mono', monospace; font-size:15px;
-      color:#2DD4BF; letter-spacing:0.3px;
+      font-weight:700; text-transform:uppercase; letter-spacing:0.8px;
+      color:#2DD4BF;
       background:rgba(45,212,191,0.08); padding:4px 12px;
       border-radius:30px; border:1px solid rgba(45,212,191,0.2);
     }
@@ -68,7 +73,8 @@
     .navlinks a:hover::after{width:100%;}
 
     /* hero */
-    header.hero{padding:120px 0 80px; position:relative;}
+    header.hero{padding:120px 0 80px; position:relative; min-height:calc(100vh - 72px); display:flex; align-items:center;}
+    .hero-inner{width:100%;}
     .tag-eyebrow{
       display:inline-flex; align-items:center; gap:10px;
       font-family:'JetBrains Mono', monospace; font-size:12px;
@@ -84,11 +90,17 @@
     }
     @keyframes pulse-dot{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.3; transform:scale(0.8);}}
 
+    .hero-name{
+      font-family:'JetBrains Mono', monospace; font-size:14px;
+      font-weight:700; text-transform:uppercase; letter-spacing:2px;
+      color:#F5A623; margin-bottom:14px;
+    }
+
     .hero h1{
       font-family:'Space Grotesk', sans-serif;
-      font-weight:700; font-size:clamp(44px, 7vw, 76px);
+      font-weight:700; font-size:clamp(44px, 6.5vw, 84px);
       line-height:1.05; letter-spacing:-0.02em;
-      max-width:880px;
+      max-width:1000px;
       text-shadow:0 0 40px rgba(45,212,191,0.08);
     }
     .hero h1 .cursor{
@@ -99,7 +111,7 @@
     @keyframes blink{0%,100%{opacity:1;} 50%{opacity:0;}}
 
     .hero p.lede{
-      margin-top:24px; max-width:600px; color:#8892b0; font-size:18px;
+      margin-top:24px; max-width:680px; color:#8892b0; font-size:18px;
       line-height:1.6; backdrop-filter:blur(4px);
     }
     .hero-meta{
@@ -139,14 +151,14 @@
     .btn:focus-visible{outline:2px solid #2DD4BF; outline-offset:4px;}
 
     /* section */
-    section{padding:80px 0; border-top:1px solid rgba(45,212,191,0.06); position:relative;}
+    section{padding:80px 0; border-top:1px solid rgba(45,212,191,0.06); position:relative; width:100%;}
     .sec-head{
       display:flex; align-items:baseline; justify-content:space-between;
       margin-bottom:44px; flex-wrap:wrap; gap:8px;
     }
     .sec-head h2{
-      font-family:'Space Grotesk', sans-serif; font-size:30px;
-      font-weight:600; letter-spacing:-0.01em;
+      font-family:'Space Grotesk', sans-serif; font-size:32px;
+      font-weight:700; letter-spacing:0.02em; text-transform:uppercase;
       background:linear-gradient(135deg, #eef2f8 0%, #8892b0 100%);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     }
@@ -166,7 +178,7 @@
       align-items:center;
     }
     @media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
-    .about-text p{color:#8892b0; margin-bottom:18px; max-width:54ch;}
+    .about-text p{color:#8892b0; margin-bottom:18px; max-width:60ch;}
     .profile-img-wrap{
       display:flex; justify-content:center; align-items:center;
     }
@@ -195,6 +207,8 @@
       font-family:'Space Grotesk', sans-serif; font-size:20px; font-weight:600;
     }
     .stat-block .sub{font-size:13px; color:#8892b0; margin-top:4px;}
+    .stat-row{display:flex; flex-wrap:wrap; gap:16px;}
+    .stat-row .stat-block{flex:1; min-width:200px;}
 
     /* skills */
     .skill-cols{
@@ -203,7 +217,8 @@
       border-radius:20px; overflow:hidden;
       backdrop-filter:blur(4px);
     }
-    @media(max-width:900px){.skill-cols{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:1000px){.skill-cols{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:520px){.skill-cols{grid-template-columns:1fr;}}
     .skill-col{
       background:rgba(10,15,30,0.7); padding:28px 22px;
       backdrop-filter:blur(4px);
@@ -222,6 +237,20 @@
     .skill-col li::before{
       content:''; width:6px; height:6px; background:#2DD4BF;
       border-radius:50%; flex:none; box-shadow:0 0 12px #2DD4BF;
+    }
+    .soft-skills{
+      margin-top:1px; padding:22px 22px; background:rgba(10,15,30,0.7);
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .soft-skills h3{
+      font-family:'JetBrains Mono', monospace; font-size:12px;
+      color:#F5A623; text-transform:uppercase; letter-spacing:.06em;
+    }
+    .soft-skills span{
+      font-family:'JetBrains Mono', monospace; font-size:12px;
+      color:#eef2f8; background:rgba(45,212,191,0.06);
+      border:1px solid rgba(45,212,191,0.15);
+      padding:4px 14px; border-radius:30px;
     }
 
     /* projects */
@@ -278,21 +307,49 @@
 
     /* education */
     .edu-item{
-      display:grid; grid-template-columns:120px 1fr;
+      display:grid; grid-template-columns:140px 1fr;
       gap:28px; padding:24px 0;
       border-top:1px solid rgba(45,212,191,0.06);
     }
     .edu-item:first-child{border-top:none;}
+    @media(max-width:600px){.edu-item{grid-template-columns:1fr; gap:10px;}}
     .edu-year{
       font-family:'JetBrains Mono', monospace; font-size:13px;
       color:#F5A623; background:rgba(245,166,35,0.05);
       padding:2px 12px; border-radius:30px; text-align:center;
+      height:fit-content;
     }
     .edu-item h3{
       font-family:'Space Grotesk', sans-serif; font-size:18px;
       font-weight:600; margin-bottom:6px;
     }
-    .edu-item p{color:#8892b0; font-size:14px;}
+    .edu-item p{color:#8892b0; font-size:14px; margin-bottom:4px;}
+    .edu-item .edu-badge{
+      display:inline-block; margin-top:8px; font-family:'JetBrains Mono', monospace;
+      font-size:11px; color:#2DD4BF; background:rgba(45,212,191,0.06);
+      border:1px solid rgba(45,212,191,0.2); padding:3px 12px; border-radius:30px;
+    }
+
+    /* achievements / certifications */
+    .ach-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+    @media(max-width:760px){.ach-grid{grid-template-columns:1fr;}}
+    .ach-card{
+      border:1px solid rgba(45,212,191,0.1); background:rgba(17,25,45,0.4);
+      padding:28px; border-radius:20px; backdrop-filter:blur(6px);
+    }
+    .ach-card h3{
+      font-family:'JetBrains Mono', monospace; font-size:12px;
+      color:#F5A623; text-transform:uppercase; letter-spacing:.06em;
+      margin-bottom:18px;
+    }
+    .ach-card ul{list-style:none; display:flex; flex-direction:column; gap:14px;}
+    .ach-card li{
+      font-size:14px; color:#eef2f8; display:flex; gap:10px; align-items:flex-start;
+    }
+    .ach-card li::before{
+      content:'▸'; color:#2DD4BF; flex:none;
+    }
+    .ach-card li .sub{display:block; color:#8892b0; font-size:12.5px; margin-top:2px;}
 
     /* contact */
     .contact-panel{
@@ -304,6 +361,7 @@
     }
     .contact-panel h2{
       font-family:'Space Grotesk', sans-serif; font-size:32px;
+      font-weight:700; text-transform:uppercase; letter-spacing:0.02em;
       margin-bottom:14px;
     }
     .contact-panel p{color:#8892b0; max-width:48ch; margin:0 auto 32px;}
@@ -341,19 +399,21 @@
         <a href="#skills">skills</a>
         <a href="#projects">projects</a>
         <a href="#education">education</a>
+        <a href="#achievements">achievements</a>
         <a href="#contact">contact</a>
       </div>
     </div>
   </nav>
 
   <header class="hero">
-    <div class="wrap">
+    <div class="wrap hero-inner">
+      <div class="hero-name mono">Pratheek Harish</div>
       <div class="tag-eyebrow">model_status: training → deployment-ready</div>
       <h1 class="display">Building systems that see,<br>classify, and predict<span class="cursor">&nbsp;</span></h1>
-      <p class="lede">I'm Pratheek Harish, a final-year Computer Science & Engineering student specializing in AI/ML and Computer Vision — training CNNs on real-world classification problems and shipping them as usable demos.</p>
+      <p class="lede">I'm Pratheek Harish, a 7th-semester Computer Science & Engineering student specializing in AI/ML and Computer Vision — training CNNs on real-world classification problems, fine-tuning transfer-learning architectures like VGG-19, and now expanding into applied LLM tooling with RAG and LangChain.</p>
       <div class="hero-meta">
         <span><b>Focus</b> · AI / ML Engineering</span>
-        <span><b>Currently</b> · IV Year CSE, VTU</span>
+        <span><b>Currently</b> · VII Sem CSE, CGPA 8.95</span>
         <span><b>Next</b> · M.Tech (CS) via Karnataka PGCET</span>
         <span><b>Open to</b> · AI/ML Internships</span>
       </div>
@@ -374,11 +434,18 @@
       <div class="about-grid">
         <div class="about-text">
           <p>I'm an AI/ML-focused engineering student who learns by building — most of my technical growth has come from taking a dataset, wrestling it into shape, training a model against it, and pushing the result somewhere people can actually try it, usually as a Gradio demo.</p>
-          <p>My current work sits mostly in computer vision — image classification, CNN architectures, and the full pipeline from preprocessing to evaluation — alongside a broader base in deep learning, cloud computing, and data structures & algorithms. I'm working toward an AI/ML internship now, and an M.Tech in Computer Science after graduation.</p>
-          <div class="stat-block">
-            <div class="label">Core stack</div>
-            <div class="value">Python · TensorFlow / Keras</div>
-            <div class="sub">Scikit-learn, OpenCV, Gradio, Google Colab</div>
+          <p>My current work sits mostly in computer vision — image classification, CNN architectures, VGG-19 transfer learning, and the full pipeline from preprocessing to evaluation — alongside a growing base in Generative AI (RAG, Prompt Engineering, LangChain) and web development. I'm working toward an AI/ML internship now, and an M.Tech in Computer Science after graduation.</p>
+          <div class="stat-row">
+            <div class="stat-block">
+              <div class="label">Core stack</div>
+              <div class="value">Python · TensorFlow / Keras</div>
+              <div class="sub">Scikit-learn, OpenCV, Gradio, Google Colab</div>
+            </div>
+            <div class="stat-block">
+              <div class="label">Academics</div>
+              <div class="value">CGPA 8.95 / 10</div>
+              <div class="sub">Don Bosco Institute of Technology, Bengaluru</div>
+            </div>
           </div>
         </div>
         <div class="profile-img-wrap">
@@ -396,10 +463,15 @@
         <span class="sec-index mono">02 / stack</span>
       </div>
       <div class="skill-cols">
-        <div class="skill-col"><h3>Languages</h3><ul><li>Python</li><li>Data Structures &amp; Algorithms</li></ul></div>
-        <div class="skill-col"><h3>ML / DL</h3><ul><li>TensorFlow / Keras</li><li>Scikit-learn</li><li>CNN model development</li><li>Model evaluation</li></ul></div>
-        <div class="skill-col"><h3>Computer Vision</h3><ul><li>Image classification</li><li>OpenCV (basics)</li></ul></div>
-        <div class="skill-col"><h3>Tools &amp; Platforms</h3><ul><li>Google Colab</li><li>Gradio</li><li>Cloud computing</li></ul></div>
+        <div class="skill-col"><h3>Languages</h3><ul><li>Python</li><li>Java</li><li>Data Structures &amp; Algorithms</li></ul></div>
+        <div class="skill-col"><h3>ML / DL</h3><ul><li>CNN, VGG-19</li><li>Transfer Learning</li><li>TensorFlow / Keras</li><li>Scikit-learn</li><li>Model Evaluation</li></ul></div>
+        <div class="skill-col"><h3>Generative AI / LLM</h3><ul><li>RAG</li><li>Prompt Engineering</li><li>LangChain</li><li>LLM</li></ul></div>
+        <div class="skill-col"><h3>Web &amp; Tools</h3><ul><li>React</li><li>MySQL</li><li>Google Colab · Gradio</li><li>Git / GitHub</li></ul></div>
+      </div>
+      <div class="soft-skills mono">
+        <h3>Soft skills</h3>
+        <span>Presentation</span>
+        <span>Leadership</span>
       </div>
     </div>
   </section>
@@ -411,7 +483,8 @@
         <span class="sec-index mono">03 / detections</span>
       </div>
       <div class="proj-grid">
-        <div class="proj-card"><div class="proj-tag">class: agriculture › plant-disease</div><h3>DeepLeaf — Plant Disease Detection</h3><p>CNN-based classifier that identifies plant diseases from leaf images, covering the full pipeline from preprocessing to deployment as a usable demo.</p><div class="proj-stack"><span>Python</span><span>TensorFlow/Keras</span><span>CNN</span><span>Gradio</span></div><div class="conf"><span>build</span><div class="conf-bar" style="--w:92%"><i></i></div><span>deployed</span></div></div>
+        <div class="proj-card"><div class="proj-tag">class: agriculture › plant-disease · major project, ongoing 2026</div><h3>DeepLeaf — Plant Disease Detection &amp; Diagnosis</h3><p>Deep learning system detecting and diagnosing plant leaf diseases using CNN and VGG-19 transfer learning, with dataset collection, preprocessing, and augmentation across multiple plant species. Benchmarks custom CNN architectures against fine-tuned VGG-19 on Google Colab, with a Gradio interface for real-time diagnosis.</p><div class="proj-stack"><span>Python</span><span>TensorFlow/Keras</span><span>CNN</span><span>VGG-19</span><span>Gradio</span></div><div class="conf"><span>build</span><div class="conf-bar" style="--w:92%"><i></i></div><span>in progress</span></div></div>
+        <div class="proj-card"><div class="proj-tag">class: web › event-management · mini project, completed 2025</div><h3>College Event Management System</h3><p>Digital platform simplifying event coordination for students and organizers — managing event details, registrations, and notifications to improve coordination efficiency.</p><div class="proj-stack"><span>React</span><span>MySQL</span></div><div class="conf"><span>build</span><div class="conf-bar" style="--w:100%"><i></i></div><span>completed</span></div></div>
         <div class="proj-card"><div class="proj-tag">class: agriculture › lemon-leaf</div><h3>Lemon Leaf Disease Classification</h3><p>CNN model trained to classify lemon leaf disease categories with a focus on preprocessing quality and evaluation against a held-out test set.</p><div class="proj-stack"><span>Python</span><span>CNN</span><span>Confusion Matrix</span></div><div class="conf"><span>build</span><div class="conf-bar" style="--w:85%"><i></i></div><span>evaluated</span></div></div>
         <div class="proj-card"><div class="proj-tag">class: sustainability › waste-sort</div><h3>Waste Classification</h3><p>Image classification model that sorts waste into categories using a CNN, built to explore real-world deployment constraints around sustainability.</p><div class="proj-stack"><span>Python</span><span>TensorFlow/Keras</span><span>CNN</span></div><div class="conf"><span>build</span><div class="conf-bar" style="--w:80%"><i></i></div><span>tested</span></div></div>
         <div class="proj-card"><div class="proj-tag">class: healthcare › tabular-ml</div><h3>Heart Disease Prediction</h3><p>Classical ML model predicting heart disease risk from patient data, with model evaluation via classification report and confusion matrix analysis.</p><div class="proj-stack"><span>Python</span><span>Scikit-learn</span><span>Classification Report</span></div><div class="conf"><span>build</span><div class="conf-bar" style="--w:88%"><i></i></div><span>evaluated</span></div></div>
@@ -425,8 +498,47 @@
         <h2>Education</h2>
         <span class="sec-index mono">04 / timeline</span>
       </div>
-      <div class="edu-item"><div class="edu-year mono">Present</div><div><h3>B.E. Computer Science &amp; Engineering — IV Year <span class="fill-note">add college</span></h3><p>VTU curriculum. Maintaining a high CGPA <span class="fill-note">add CGPA</span> while focusing coursework and self-study on AI, ML, Deep Learning, Computer Vision, and Cloud Computing.</p></div></div>
-      <div class="edu-item"><div class="edu-year mono">Planned</div><div><h3>M.Tech, Computer Science</h3><p>Targeting admission via Karnataka PGCET as the next step toward specializing further in AI/ML.</p></div></div>
+      <div class="edu-item">
+        <div class="edu-year mono">2023 – 2027</div>
+        <div>
+          <h3>B.E. Computer Science &amp; Engineering — Don Bosco Institute of Technology, Bengaluru</h3>
+          <p>VTU curriculum · CGPA: 8.95 · Currently in 7th semester.</p>
+          <p>Coursework and self-study focused on AI, ML, Deep Learning, Computer Vision, and Generative AI / LLM tooling.</p>
+          <span class="edu-badge mono">Silver Medal — 8.5 SGPA, 1st year</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year mono">Planned</div>
+        <div>
+          <h3>M.Tech, Computer Science</h3>
+          <p>Targeting admission via Karnataka PGCET as the next step toward specializing further in AI/ML.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <div class="wrap reveal">
+      <div class="sec-head">
+        <h2>Certifications &amp; Activities</h2>
+        <span class="sec-index mono">05 / record</span>
+      </div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <h3>Certifications &amp; Achievements</h3>
+          <ul>
+            <li>Spoken Tutorial Project, IIT Bombay<span class="sub">Blender Training</span></li>
+            <li>Spoken Tutorial Project, IIT Bombay<span class="sub">LaTeX Training</span></li>
+            <li>Silver Medal<span class="sub">Awarded for securing 8.5 SGPA in 1st year of Engineering</span></li>
+          </ul>
+        </div>
+        <div class="ach-card">
+          <h3>Extracurricular</h3>
+          <ul>
+            <li>Smart India Hackathon (SIH) — Participant<span class="sub">Problem statement on AI-based UFDR (Universal Forensic Extraction Device Report) Analysis Tool</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -434,7 +546,7 @@
     <div class="wrap reveal">
       <div class="sec-head">
         <h2>Contact</h2>
-        <span class="sec-index mono">05 / connect</span>
+        <span class="sec-index mono">06 / connect</span>
       </div>
       <div class="contact-panel">
         <h2 class="display">Let's talk AI/ML</h2>
