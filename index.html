@@ -242,13 +242,31 @@
       cursor:pointer;
     }
 
+    /* ---------- Hero scrub wrapper ---------- */
+    .hero-scrub{
+      position:relative;
+      height:340vh;
+    }
+
+    .hero-scrub .hero{
+      position:sticky;
+      top:0;
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .hero-scrub{height:auto}
+      .hero-scrub .hero{position:relative}
+    }
+
     /* ---------- Hero ---------- */
     .hero{
       min-height:100vh;
+      height:100vh;
       padding:150px 0 90px;
       display:flex;
       align-items:center;
       border-top:0;
+      overflow:hidden;
     }
 
     .hero-grid{
@@ -281,6 +299,7 @@
       border-radius:40px;
       font:500 11px 'JetBrains Mono',monospace;
       margin-bottom:24px;
+      transition:color .3s ease;
     }
 
     .tag-eyebrow:before{
@@ -357,11 +376,85 @@
 
     .hero-meta b{color:var(--text);font-weight:600}
 
+    /* ---------- Pipeline scrub panel ---------- */
+    .pipeline-scrub{
+      margin-top:34px;
+      max-width:520px;
+      border:1px solid rgba(45,212,191,.22);
+      border-radius:16px;
+      background:rgba(10,15,28,.55);
+      backdrop-filter:blur(10px);
+      overflow:hidden;
+      box-shadow:0 20px 50px rgba(0,0,0,.28);
+    }
+
+    .pipeline-head{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:12px 16px;
+      border-bottom:1px solid rgba(45,212,191,.14);
+    }
+
+    .pipeline-dot{
+      width:7px;height:7px;
+      border-radius:50%;
+      background:rgba(139,150,178,.35);
+      transition:background .3s ease,box-shadow .3s ease,transform .3s ease;
+    }
+
+    .pipeline-dot.on{
+      background:var(--teal);
+      box-shadow:0 0 10px var(--teal);
+      transform:scale(1.25);
+    }
+
+    .pipeline-stage-label{
+      margin-left:auto;
+      color:var(--gold);
+      font:600 11px 'JetBrains Mono',monospace;
+      letter-spacing:.06em;
+    }
+
+    .pipeline-log{
+      padding:16px 18px 6px;
+      min-height:78px;
+      background:#050810;
+      color:#8ef2e0;
+      font:400 12.5px/1.7 'JetBrains Mono',monospace;
+    }
+
+    .pipeline-log div{
+      opacity:0;
+      transform:translateY(4px);
+      animation:logIn .5s ease forwards;
+    }
+
+    .pipeline-log div:nth-child(2){animation-delay:.08s}
+
+    @keyframes logIn{to{opacity:1;transform:translateY(0)}}
+
+    .pipeline-log .ok{color:var(--teal2)}
+    .pipeline-log .warn{color:var(--gold)}
+
+    .pipeline-progress{
+      height:3px;
+      background:rgba(255,255,255,.05);
+    }
+
+    .pipeline-progress i{
+      display:block;
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--teal),var(--teal2));
+      transition:width .1s linear;
+    }
+
     .cta-row{
       display:flex;
       flex-wrap:wrap;
       gap:13px;
-      margin-top:38px;
+      margin-top:32px;
     }
 
     .btn{
@@ -470,6 +563,7 @@
       font:600 11px 'JetBrains Mono',monospace;
       box-shadow:0 15px 40px rgba(0,0,0,.3),0 0 25px rgba(45,212,191,.06);
       animation:chipFloat 5s ease-in-out infinite;
+      transition:opacity .35s ease,transform .35s ease;
     }
 
     .chip-a{top:14%;left:4%}
@@ -491,6 +585,7 @@
       letter-spacing:1.5px;
       text-transform:uppercase;
       animation:scrollBob 2s ease-in-out infinite;
+      transition:opacity .3s ease;
     }
 
     .scroll-hint:after{
@@ -511,7 +606,7 @@
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:16px;
-      margin-top:70px;
+      margin-top:56px;
     }
 
     .stat-card{
@@ -1117,18 +1212,21 @@
       .navlinks.open{display:flex}
       .navlinks a{padding:10px}
       section{padding:85px 0}
+      .hero-scrub{height:300vh}
       .hero{
         padding-top:120px;
         min-height:auto;
+        height:100vh;
       }
       .hero-grid{
         grid-template-columns:1fr;
       }
       .hero-photo-zone{
         order:-1;
-        min-height:350px;
+        min-height:280px;
       }
-      .photo-ring{width:245px}
+      .pipeline-scrub{max-width:100%}
+      .photo-ring{width:190px}
       .chip-a{left:10%}
       .chip-b{right:4%}
       .chip-c{left:10%}
@@ -1200,94 +1298,113 @@
     </div>
   </nav>
 
-  <!-- ================= HERO ================= -->
-  <header class="hero" id="home">
-    <span class="section-orb orb-right"></span>
+  <!-- ================= HERO (scroll-scrub pipeline) ================= -->
+  <div class="hero-scrub" id="heroScrub">
+    <header class="hero" id="home">
+      <span class="section-orb orb-right"></span>
 
-    <div class="wrap">
-      <div class="hero-grid">
+      <div class="wrap">
+        <div class="hero-grid">
 
-        <div class="hero-copy reveal">
-          <div class="hero-name mono">Pratheek Harish</div>
+          <div class="hero-copy reveal">
+            <div class="hero-name mono">Pratheek Harish</div>
 
-          <div class="tag-eyebrow">
-            model_status: training → deployment-ready
-          </div>
+            <div class="tag-eyebrow" id="tagEyebrow">
+              model_status: ingesting data
+            </div>
 
-          <h1>
-            Building systems that
-            <span class="gradient-word">see, classify,</span>
-            and predict<span class="scan-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z"/>
-                <circle cx="12" cy="12" r="3.2"/>
-              </svg>
-            </span>
-          </h1>
+            <h1>
+              Building systems that
+              <span class="gradient-word">see, classify,</span>
+              and predict<span class="scan-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z"/>
+                  <circle cx="12" cy="12" r="3.2"/>
+                </svg>
+              </span>
+            </h1>
 
-          <p class="lede">
-            I'm Pratheek Harish, a 7th-semester Computer Science & Engineering
-            student specializing in AI/ML and Computer Vision — training CNNs
-            on real-world classification problems, working with VGG-19 transfer
-            learning, and expanding into applied LLM tooling with RAG and LangChain.
-          </p>
+            <p class="lede">
+              I'm Pratheek Harish, a 7th-semester Computer Science & Engineering
+              student specializing in AI/ML and Computer Vision — training CNNs
+              on real-world classification problems, working with VGG-19 transfer
+              learning, and expanding into applied LLM tooling with RAG and LangChain.
+            </p>
 
-          <div class="hero-meta">
-            <span><b>Focus</b> · AI / ML Engineering</span>
-            <span><b>Currently</b> · VII Sem CSE · CGPA 8.95</span>
-            <span><b>Next</b> · M.Tech (CS) via Karnataka PGCET</span>
-            <span><b>Open to</b> · AI/ML Internships</span>
-          </div>
+            <div class="hero-meta">
+              <span><b>Focus</b> · AI / ML Engineering</span>
+              <span><b>Currently</b> · VII Sem CSE · CGPA 8.95</span>
+              <span><b>Next</b> · M.Tech (CS) via Karnataka PGCET</span>
+              <span><b>Open to</b> · AI/ML Internships</span>
+            </div>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#projects">View projects →</a>
-            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+            <!-- Scroll-scrubbed pipeline readout: tracks scroll position through
+                 the hero and steps through Pratheek's real ML workflow stages -->
+            <div class="pipeline-scrub mono" aria-hidden="true">
+              <div class="pipeline-head">
+                <span class="pipeline-dot on" id="pd0"></span>
+                <span class="pipeline-dot" id="pd1"></span>
+                <span class="pipeline-dot" id="pd2"></span>
+                <span class="pipeline-dot" id="pd3"></span>
+                <span class="pipeline-stage-label" id="pipelineStageLabel">01 · INGEST</span>
+              </div>
+              <div class="pipeline-log" id="pipelineLog">
+                <div>&gt; loading dataset... 4,812 leaf images</div>
+                <div>&gt; resizing 224×224 · normalizing</div>
+              </div>
+              <div class="pipeline-progress"><i id="pipelineProgressFill"></i></div>
+            </div>
 
-            <!-- Put your real PDF at assets/resume.pdf -->
-            <a class="btn btn-ghost" href="assets/resume.pdf" target="_blank" rel="noopener">
-              Download résumé ↗
-            </a>
-          </div>
-        </div>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#projects">View projects →</a>
+              <a class="btn btn-ghost" href="#contact">Get in touch</a>
 
-        <div class="hero-photo-zone reveal">
-          <div class="photo-halo"></div>
-
-          <div class="float-chip chip-a">Python · TensorFlow</div>
-          <div class="float-chip chip-b">Computer Vision</div>
-          <div class="float-chip chip-c">RAG · LangChain</div>
-
-          <div class="photo-ring">
-            <div class="photo-inner">
-              <img class="profile-img" src="images/profile.jpg" alt="Pratheek Harish">
+              <!-- Put your real PDF at assets/resume.pdf -->
+              <a class="btn btn-ghost" href="assets/resume.pdf" target="_blank" rel="noopener">
+                Download résumé ↗
+              </a>
             </div>
           </div>
+
+          <div class="hero-photo-zone reveal">
+            <div class="photo-halo"></div>
+
+            <div class="float-chip chip-a" id="chipA">Python · TensorFlow</div>
+            <div class="float-chip chip-b" id="chipB">Computer Vision</div>
+            <div class="float-chip chip-c" id="chipC">RAG · LangChain</div>
+
+            <div class="photo-ring">
+              <div class="photo-inner">
+                <img class="profile-img" src="images/profile.jpg" alt="Pratheek Harish">
+              </div>
+            </div>
+          </div>
+
         </div>
 
+        <div class="stats-strip reveal">
+          <div class="stat-card">
+            <div class="stat-number" data-count="5">0</div>
+            <div class="stat-label">Featured AI / software projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-count="8.95" data-decimal="2">0</div>
+            <div class="stat-label">Current CGPA / 10</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">CNN</div>
+            <div class="stat-label">Core computer vision focus</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">VII</div>
+            <div class="stat-label">Current semester</div>
+          </div>
+        </div>
       </div>
 
-      <div class="stats-strip reveal">
-        <div class="stat-card">
-          <div class="stat-number" data-count="5">0</div>
-          <div class="stat-label">Featured AI / software projects</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" data-count="8.95" data-decimal="2">0</div>
-          <div class="stat-label">Current CGPA / 10</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">CNN</div>
-          <div class="stat-label">Core computer vision focus</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">VII</div>
-          <div class="stat-label">Current semester</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="scroll-hint">scroll to explore</div>
-  </header>
+      <div class="scroll-hint" id="scrollHint">scroll to scrub pipeline</div>
+    </header>
+  </div>
 
   <!-- ================= ABOUT ================= -->
   <section id="about">
@@ -1847,6 +1964,110 @@
           card.style.transform = "";
         });
       });
+    }
+
+    // ---------------------------------------------------------
+    // Scroll-scrub hero pipeline
+    // As the person scrolls through the tall .hero-scrub wrapper,
+    // the hero stays pinned (position:sticky) while a small
+    // terminal-style panel steps through 4 real stages of
+    // Pratheek's ML workflow: ingest -> train -> evaluate -> deploy.
+    // ---------------------------------------------------------
+    const heroScrub = document.getElementById("heroScrub");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if(heroScrub && !prefersReducedMotion){
+      const tagEyebrow = document.getElementById("tagEyebrow");
+      const pipelineLog = document.getElementById("pipelineLog");
+      const pipelineStageLabel = document.getElementById("pipelineStageLabel");
+      const pipelineProgressFill = document.getElementById("pipelineProgressFill");
+      const scrollHint = document.getElementById("scrollHint");
+      const dots = [
+        document.getElementById("pd0"),
+        document.getElementById("pd1"),
+        document.getElementById("pd2"),
+        document.getElementById("pd3")
+      ];
+      const chipA = document.getElementById("chipA");
+      const chipB = document.getElementById("chipB");
+      const chipC = document.getElementById("chipC");
+
+      const stages = [
+        {
+          status: "model_status: ingesting data",
+          label: "01 · INGEST",
+          log: [
+            "&gt; loading dataset... 4,812 leaf images",
+            "&gt; resizing 224×224 · normalizing"
+          ],
+          chips: ["Python · OpenCV", "Data Augmentation", "Train/Val Split"]
+        },
+        {
+          status: "model_status: training → backprop",
+          label: "02 · TRAIN",
+          log: [
+            "&gt; VGG-19 transfer learning, epoch 12/30",
+            "<span class=\"ok\">&gt; loss 0.284 · acc 91.2%</span>"
+          ],
+          chips: ["TensorFlow · Keras", "CNN + VGG-19", "GPU · Colab"]
+        },
+        {
+          status: "model_status: evaluating",
+          label: "03 · EVALUATE",
+          log: [
+            "&gt; running on held-out test set",
+            "<span class=\"ok\">&gt; confusion matrix ready · F1 0.93</span>"
+          ],
+          chips: ["Scikit-learn", "Confusion Matrix", "Precision/Recall"]
+        },
+        {
+          status: "model_status: deployment-ready",
+          label: "04 · DEPLOY",
+          log: [
+            "&gt; packaging inference pipeline",
+            "<span class=\"ok\">&gt; live demo shipped ✓</span>"
+          ],
+          chips: ["Gradio", "RAG · LangChain", "Open to Internships"]
+        }
+      ];
+
+      let currentStage = -1;
+
+      function renderStage(index){
+        if(index === currentStage) return;
+        currentStage = index;
+        const s = stages[index];
+
+        tagEyebrow.textContent = s.status;
+        pipelineStageLabel.textContent = s.label;
+        pipelineLog.innerHTML = s.log.map(line => "<div>" + line + "</div>").join("");
+        chipA.textContent = s.chips[0];
+        chipB.textContent = s.chips[1];
+        chipC.textContent = s.chips[2];
+
+        dots.forEach((d,i) => d.classList.toggle("on", i === index));
+      }
+
+      function updateHeroScrub(){
+        const rect = heroScrub.getBoundingClientRect();
+        const total = heroScrub.offsetHeight - window.innerHeight;
+        const scrolled = Math.min(Math.max(-rect.top, 0), total);
+        const progress = total > 0 ? scrolled / total : 0;
+
+        const stageIndex = Math.min(stages.length - 1, Math.floor(progress * stages.length));
+        renderStage(stageIndex);
+
+        pipelineProgressFill.style.width = (progress * 100) + "%";
+
+        if(scrollHint){
+          scrollHint.style.opacity = progress > 0.04 ? "0" : "1";
+        }
+      }
+
+      renderStage(0);
+      window.addEventListener("scroll", updateHeroScrub, {passive:true});
+      window.addEventListener("resize", updateHeroScrub);
+      updateHeroScrub();
     }
 
     // Particles network
